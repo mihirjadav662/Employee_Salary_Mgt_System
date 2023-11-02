@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salary Management System</title>
+    <style>
+         body {
+            background-color: #414141;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+            height : auto;
+            /* background-color: #007bff; */
+        }
+
+        .emp {
+            /* background-color: #fff; */
+            border: 2px solid #007bff;
+            width: 50%;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: #007bff;
+            margin: 0 auto; /* Center the .marks div */
+        }
+
+        table {
+            width: 100%; /* Adjusted to fill the .marks div */
+            text-align: left;
+            border: 1px solid #007bff; /* Add a border around the table */
+            background-color: white;
+        }
+
+        th {
+            background-color: rgb(199, 255, 67);
+            color: rgb(86, 88, 233);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        .btn-res {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .btn-res:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .res {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emp">
+            <table>
+                <tr>
+                    <th colspan="2"><h1>Emoloyee Salary Management System</h1></th>
+                </tr>
+                <tr>
+                    <td>Emp_id</td>
+                    <td><input type="text" class="eid"></td>
+                </tr>
+                <tr>
+                    <td>Emp_name</td>
+                    <td><input type="text" class="ename"></td>
+                </tr>
+                <tr>
+                    <td>Basic Salary</td>
+                    <td><input type="number" class="bsal"></td>
+                </tr>
+
+                <tr>
+                    <td><input type="button" value="Submit" class="btn-res" onclick="res()"></td>
+                </tr>
+
+                <tr>
+                    <td>DA</td>
+                    <td><input type="number" class="da"></td>
+                </tr>
+                <tr>
+                    <td>TA</td>
+                    <td><input type="number" class="ta"></td>
+                </tr>
+                <tr>
+                    <td>HRA</td>
+                    <td><input type="number" class="hra"></td>
+                </tr>
+                <tr>
+                    <td>PF</td>
+                    <td><input type="number" class="pf"></td>
+                </tr>
+
+                <tr>
+                    <td>Net Salary</td>
+                    <td><input type="number" class="netsal"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        function res(){
+            const ta = 0.05;
+            const hra = 0.30;
+            const pf = 0.12;
+            let bsal = parseFloat(document.getElementsByClassName("bsal")[0].value);
+            
+
+            function dearness() {
+                   return bsal / 10;
+            } 
+
+            let dainput = dearness();
+
+            function calculateTA(bsal, ta) {
+                   const taAmount = bsal * ta;
+                   return taAmount;
+            }
+
+            let tainput = calculateTA(bsal, ta);
+
+            function calculateHRA(bsal, hra) {
+                const hraAmount = bsal * hra;
+                return hraAmount;
+            } 
+
+            let hrainput = calculateHRA(bsal, hra);
+
+            function provident (){
+                const pfrate = 0.12;
+                const pfdeduction = bsal * pfrate;
+                return pfdeduction;
+            }
+
+            let pfinput = provident();
+            
+            function totsal(bsal,dainput,tainput,hrainput,pfinput){
+                return ((bsal + dainput + tainput + hrainput )- pfinput) ;
+            }
+
+            
+            const netsal = totsal(bsal,dainput,tainput,hrainput,pfinput);
+            document.getElementsByClassName("da")[0].value = dainput; 
+            document.getElementsByClassName("ta")[0].value = tainput; 
+            document.getElementsByClassName("pf")[0].value = pfinput; 
+            document.getElementsByClassName("hra")[0].value = hrainput; 
+            document.getElementsByClassName("netsal")[0].value = netsal; 
+
+        }
+    </script>
+</body>
+</html>
